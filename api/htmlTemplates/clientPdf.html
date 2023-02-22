@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Hello world!</title>
+  </head>
+  <br>
+    <table style="width:100%;border-collapse: collapse;border: 1px solid;font-size:12px;">
+      <tr>
+        <th style="border: 1px solid;">SN.</th>
+        <th style="border: 1px solid;">ID</th>
+        <th style="border: 1px solid;">Name</th>
+        <th style="border: 1px solid;">Address</th>
+        <th style="border: 1px solid;">Contact</th>
+        <th style="border: 1px solid;">Total Amount</th>
+      </tr>
+      {{#each users}}
+      <tr>
+        <td style="border: 1px solid;">{{this.sn}}</td>
+        <td style="border: 1px solid;">{{this.serialNumber}}</td>
+        <td style="border: 1px solid;">{{this.name}}</td>
+        <td style="border: 1px solid;">{{this.address}}</td>
+        <td style="border: 1px solid;">{{this.contactNumber}}</td>
+        <td style="border: 1px solid;">{{this.totalRemainAmount}}</td>
+      </tr>
+      {{/each}}
+     
+    </table>
+   <div>
+
+   </div>
+    </body>
+</html>

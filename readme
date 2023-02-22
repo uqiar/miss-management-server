@@ -1,0 +1,3 @@
+DATABASE=mongodb://localhost:27017/cementAgencyV1
+#DATABASE=mongodb+srv://uqair:programing1995@cluster0.933tk.mongodb.net/cementAgencyV1
+TINIFY_KEY=CN46kUDLZxHtWyityol1zZcXfJax6j4l
