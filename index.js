@@ -25,7 +25,9 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 5
 app.use(cookieParser());
 app.use(cors());
 
-
+app.get("/test",(req,res)=>{
+    res.status(200).json("your server is running")
+})
 
 require('./api/routes/user')(app)
 require('./api/routes/uploadImage')(app)
