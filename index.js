@@ -15,7 +15,7 @@ mongoose.connect(process.env.DATABASE, ((err, db) => {
         console.log("mongodb connection failed!!!!")
     } else {
         console.log("mongodb connected success")
-        //require('./cron')
+        require('./cron')
     }
 }))
 

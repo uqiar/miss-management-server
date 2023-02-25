@@ -13,6 +13,7 @@ const monthlyConfigSchema = mongoose.Schema({
     totalDays: {
         type: Number,
         require: true,
+        default:0
     },
     payed: {
         type: Boolean,

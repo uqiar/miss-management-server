@@ -12,8 +12,11 @@ exports.addNewItem = async (req, res) => {
 
 exports.getItems = async (req, res) => {
     try {
-         const {startDate,endDate}=req.body;
+         const {startDate,endDate,user}=req.body;
          let query={}
+         if(user){
+            query.user=user
+         }
          if(startDate&&endDate){
              query.$and=[
               {date:{$gte:new Date(startDate).toISOString()}},

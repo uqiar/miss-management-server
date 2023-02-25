@@ -79,9 +79,16 @@ exports.deleteUser = async (req, res) => {
 
 exports.Report = async (req, res) => {
     try {
-        const {startDate,endDate}=req.body
+        const {startDate,endDate,user}=req.body
+        let userQuery={};
+        if(user){
+          userQuery.$expr = { $eq: [ '$_id' , { $toObjectId: user } ] }
+        }
         var doc = await User.aggregate(
             [
+              {
+                $match:{...userQuery}
+              },
                 {
                   $lookup: {
                     from: "items",

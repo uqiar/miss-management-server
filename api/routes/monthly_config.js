@@ -6,4 +6,5 @@ module.exports = function (app) {
     app.put("/api/monthlyConfig/newConfigure",[authJwt.verifyToken], controller.configureNewUser);
     app.delete("/api/monthlyConfig/delete/:id",[authJwt.verifyToken], controller.deleteConfigUser);
     app.put("/api/monthlyConfig/update/:id",[authJwt.verifyToken], controller.updatedUserMonthsDays);
+    app.put("/api/monthlyConfig/payedUnpayed",[authJwt.verifyToken], controller.markedPaydUnpayed);
 };
