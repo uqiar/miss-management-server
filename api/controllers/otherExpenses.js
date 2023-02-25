@@ -1,6 +1,6 @@
 
 const OtherExpenses = require('../models/otherExpenses');
-
+const moment =require("moment")
 exports.addNewItem = async (req, res) => {
     try {
         var data = req.body;
@@ -12,7 +12,9 @@ exports.addNewItem = async (req, res) => {
 }
 exports.getItems = async (req, res) => {
     try {
-         const {startDate,endDate}=req.body;
+         var {startDate,endDate}=req.body;
+         startDate=moment(startDate).format("YYYY-MM-DD")
+        endDate=moment(endDate).format("YYYY-MM-DD")
          let query={}
          if(startDate&&endDate){
              query.$and=[

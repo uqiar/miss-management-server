@@ -1,4 +1,5 @@
 const Items = require('../models/items');
+const moment =require("moment");
 
 exports.addNewItem = async (req, res) => {
     try {
@@ -19,10 +20,11 @@ exports.getItems = async (req, res) => {
          }
          if(startDate&&endDate){
              query.$and=[
-              {date:{$gte:new Date(startDate).toISOString()}},
-              {date:{$lte:new Date(endDate).toISOString()}}
+              {date:{$gte:new Date(moment(startDate).format("YYYY-MM-DD"))}},
+              {date:{$lte:new Date(moment(endDate).format("YYYY-MM-DD"))}}
              ]
             }
+            console.log(new Date(moment(startDate).format("YYYY-MM-DD")))
         var doc = await Items.find(query).populate("user").sort({date:-1})
         res.status(200).json(doc)
     } catch (err) {

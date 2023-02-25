@@ -2,6 +2,7 @@ const User = require('../models/user');
 var { encrypt, decrypt } = require('../../utils/helper');
 var jwt = require("jsonwebtoken");
 const config = require("../config/auth.config");
+const moment =require("moment")
 
 exports.registerNewUser = async (req, res) => {
     try {
@@ -79,7 +80,9 @@ exports.deleteUser = async (req, res) => {
 
 exports.Report = async (req, res) => {
     try {
-        const {startDate,endDate,user}=req.body
+        var {startDate,endDate,user}=req.body
+        startDate=moment(startDate).format("YYYY-MM-DD")
+        endDate=moment(endDate).format("YYYY-MM-DD")
         let userQuery={};
         if(user){
           userQuery.$expr = { $eq: [ '$_id' , { $toObjectId: user } ] }
