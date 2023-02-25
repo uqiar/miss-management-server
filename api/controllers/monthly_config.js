@@ -1,3 +1,4 @@
+const moment = require('moment');
 const MonthlyConfig = require('../models/monthly_config');
 
 exports.getConfigByMonth = async (req, res) => {
@@ -20,7 +21,7 @@ exports.configureNewUser = async (req, res) => {
     try {
          const {date,user,totalDays}=req.body;
              let doc= await new MonthlyConfig({
-                  month:new Date(date).toISOString(),
+                  month:new Date(moment(date).format("YYYY-MM-DD")),
                   user,
                   totalDays
               }).save()
