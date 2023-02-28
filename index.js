@@ -26,6 +26,7 @@ app.use(cookieParser());
 app.use(cors());
 
 app.get("/test",(req,res)=>{
+    console.log("requiest come here",new Date())
     res.status(200).json("your server is running")
 })
 
