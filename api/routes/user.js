@@ -8,4 +8,5 @@ module.exports = function (app) {
     app.put("/api/user/update/:id", [authJwt.verifyToken], controller.updateRecord);
     app.delete("/api/user/delete/:id", [authJwt.verifyToken], controller.deleteUser);
     app.post("/api/user/allUserReports", [authJwt.verifyToken], controller.Report);
+    app.get("/api/user/logout", [authJwt.verifyToken], controller.logout);
 };

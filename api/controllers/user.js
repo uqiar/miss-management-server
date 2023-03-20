@@ -20,26 +20,41 @@ exports.registerNewUser = async (req, res) => {
 exports.login = async (req, res, next) => {
     try {
         const data = req.body;
-        var result = await User.find({ email: data.email })
-        if (!result.length) {
+        var result = await User.findOne({ email: data.email })
+        if (!result) {
             return res.status(404).json({ message: "User Not Found" })
         }
-        var decryptedPass = await decrypt(result[0].password);
+        var decryptedPass = await decrypt(result.password);
         if (decryptedPass !== data.password) {
             return res.status(401).json({ message: "Invalid Password" });
         }
+        if(result.is_logedIn){
+          return res.status(401).json({ message: "This account is already logged in!" });
+        }
+        await User.findByIdAndUpdate({_id:result._id},{is_logedIn:true})
 
-        var token = jwt.sign({ id: result[0]._id }, config.secret, {
+        var token = jwt.sign({ id: result._id }, config.secret, {
             expiresIn: config.expiresIn
         });
         res.status(200).json({
-            user: result[0],
+            user: result,
             accessToken: token
         })
     }
     catch (err) {
         res.status(400).json({ message: err.message })
     }
+
+}
+
+exports.logout = async (req, res, next) => {
+  try {
+        await User.findByIdAndUpdate({_id:req.userId},{is_logedIn:false})
+      res.status(200).json(true)
+  }
+  catch (err) {
+      res.status(400).json({ message: err.message })
+  }
 
 }
 

@@ -5,7 +5,7 @@ const GivesMonySchema = new Schema({
     amount: {
         type: Number
     },
-    notes: {
+    note: {
         type: String
     },
     date: {
@@ -19,7 +19,7 @@ const CollectedMonySchema = new Schema({
     amount: {
         type: Number
     },
-    notes: {
+    note: {
         type: String
     },
     date: {

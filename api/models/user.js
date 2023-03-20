@@ -17,6 +17,10 @@ const userSchema = mongoose.Schema({
         type:String,
         enum: ["ADMIN", "NORMAL"],
         default:'NORMAL'
+    },
+    is_logedIn:{
+        type:Boolean,
+        default:false
     }
 
 },
