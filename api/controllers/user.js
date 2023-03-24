@@ -28,10 +28,10 @@ exports.login = async (req, res, next) => {
         if (decryptedPass !== data.password) {
             return res.status(401).json({ message: "Invalid Password" });
         }
-        if(result.is_logedIn){
-          return res.status(401).json({ message: "This account is already logged in!" });
-        }
-        await User.findByIdAndUpdate({_id:result._id},{is_logedIn:true})
+        // if(result.is_logedIn){
+        //   return res.status(401).json({ message: "This account is already logged in!" });
+        // }
+       // await User.findByIdAndUpdate({_id:result._id},{is_logedIn:true})
 
         var token = jwt.sign({ id: result._id }, config.secret, {
             expiresIn: config.expiresIn
@@ -77,7 +77,7 @@ exports.updateRecord = async (req, res) => {
     try {
         var data = req.body;
         data.password = encrypt(data.password)
-        var doc = await User.findByIdAndUpdate({ _id: req.params.id }, data)
+        var doc = await User.findByIdAndUpdate({ _id: req.params.id }, data,{new:true})
         res.status(200).json(doc)
     } catch (err) {
         res.status(400).json({ message: err.message })
