@@ -4,8 +4,11 @@ const moment =require("moment")
 exports.addNewItem = async (req, res) => {
     try {
         var data = req.body;
-        var doc = await new OtherExpenses(data).save()
-        res.status(200).json(doc)
+            for(var i=0;i<data.length;i++){
+                await new OtherExpenses(data[i]).save()
+            }
+       
+        res.status(200).json(true)
     } catch (err) {
         res.status(400).json({ message: err.message })
     }

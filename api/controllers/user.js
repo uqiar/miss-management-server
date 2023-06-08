@@ -61,7 +61,44 @@ exports.logout = async (req, res, next) => {
 
 exports.findAll = async (req, res, next) => {
     try {
-        var result = await User.find()
+      var {startDate,endDate,isAll}=req.body
+      const query={};
+      if(!isAll){
+        query.active=true
+      }
+      startDate=moment(startDate).format("YYYY-MM-DD")
+      endDate=moment(endDate).format("YYYY-MM-DD")
+        var result = await User.aggregate(
+          [{
+          $match:query
+          },
+            {
+              $lookup: {
+                from: "monthlyconfigs",
+                localField: "_id",
+                foreignField: "user",
+                as: "config",
+                pipeline: [
+                  {
+                    $match: {
+                      $expr: {
+                        $and: [
+                          {
+                            $gte: ["$month", new Date(startDate)],
+                          },
+                          {
+                            $lte: ["$month", new Date(endDate)],
+                          },
+                        ],
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          ]
+        )
+
         for(var i=0;i<result.length;i++){
             result[i].password=await decrypt(result[i].password)
         }
