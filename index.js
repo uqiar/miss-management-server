@@ -36,6 +36,7 @@ require('./api/routes/items')(app)
 require('./api/routes/monthly_config')(app)
 require('./api/routes/otherExpenses')(app)
 require('./api/routes/myBook')(app)
+require('./api/routes/tourFunBooking')(app)
 
 const port = process.env.PORT || 3002;
 app.listen(port, () => {
