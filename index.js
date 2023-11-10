@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
+const axios =require("axios")
 //const Cron = require('./mongodb_backup')
 require('dotenv').config();
 
@@ -30,7 +31,14 @@ app.get("/test",(req,res)=>{
     res.status(200).json("your server is running")
 })
 
-
+app.get("/api/articles",async(req,res)=>{
+    try{
+    const result=await axios.get("http://13.233.128.111/custom-api-endpoint")
+    res.status(200).json(result.data)
+    }catch(err){
+        res.status(400).json(err?.message)
+    }
+})
 require('./api/routes/user')(app)
 require('./api/routes/uploadImage')(app)
 require('./api/routes/items')(app)
