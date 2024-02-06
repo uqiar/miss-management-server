@@ -47,6 +47,8 @@ require('./api/routes/otherExpenses')(app)
 require('./api/routes/myBook')(app)
 require('./api/routes/tourFunBooking')(app)
 require('./api/routes/reviews')(app)
+require('./api/routes/safariReport')(app)
+
 
 const port = process.env.PORT || 3002;
 app.listen(port, () => {
