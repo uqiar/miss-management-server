@@ -5,6 +5,15 @@ exports.addNewItem = async (req, res) => {
     try {
         var data = req.body;
         data.user=req.userId
+        let query={user:req.userId}
+        query.$and=[
+            {date:{$gte:new Date(moment(data.date).format("YYYY-MM-DD"))}},
+            {date:{$lte:new Date(moment(data.date).format("YYYY-MM-DD"))}}
+           ]
+           var findDubp = await SafariReport.findOne(query);
+           if(findDubp){
+            return res.status(400).json({message:"the same date already exist please tray again!"})
+           }
         var doc = await new SafariReport(data).save()
         res.status(200).json(doc)
     } catch (err) {
