@@ -19,6 +19,7 @@ const monthlyConfigSchema = mongoose.Schema({
         type: Boolean,
         default:false
     },
+    paymentHistory:[]
 },
     { timestamps: true }
 )

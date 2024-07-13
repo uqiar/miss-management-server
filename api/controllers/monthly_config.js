@@ -53,15 +53,16 @@ exports.updatedUserMonthsDays = async (req, res) => {
 
 exports.markedPaydUnpayed = async (req, res) => {
     try {
-        const {date,user,payed,id}=req.body;
+        const {date,user,payed,id,paymentHistory}=req.body;
          let doc;
         if(id){
-          doc=await MonthlyConfig.findOneAndUpdate({_id:id},{payed})
+          doc=await MonthlyConfig.findOneAndUpdate({_id:id},{payed,paymentHistory})
         }else{
             doc= await new MonthlyConfig({
                 month:new Date(date).toISOString(),
                 user,
-                payed
+                payed,
+                paymentHistory
             }).save()
         }
         res.status(200).json(doc)

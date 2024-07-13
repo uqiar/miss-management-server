@@ -28,6 +28,9 @@ const safariSchema = mongoose.Schema({
     salik: {
         type: Number,
     },
+    other: {
+        type: Number,
+    },
 
 },
     { timestamps: true }
