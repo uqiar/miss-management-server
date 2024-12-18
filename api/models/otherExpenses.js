@@ -6,16 +6,19 @@ const otherExpensesSchema = mongoose.Schema({
         type: Number,
         require: true,
     },
-    note:{
-    type:String,
+    note: {
+        type: String,
+    },
+    details: {
+        type: String
     },
     user: [{
         type: Schema.Types.ObjectId,
         ref: 'user'
     }],
-  
-    date:{
-        type:Date,
+
+    date: {
+        type: Date,
         require: true,
     }
 
